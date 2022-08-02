@@ -1,0 +1,12 @@
+server:
+  port: 8099
+  servlet:
+    context-path: /tqb
+spring:
+  application:
+    name: tqb-service
+  profiles:
+    active: dev
+logging:
+  level:
+    com.dhais.tqb.mapper: debug
