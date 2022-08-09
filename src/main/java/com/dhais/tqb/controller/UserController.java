@@ -56,6 +56,7 @@ public class UserController {
             user.setUpdater(userInfo.getNickName());
             user.setUpdateBy(userInfo.getUserName());
             user.setUpdateDate(new Date());
+            user.setUserName(null);
             userService.updateById(user);
             return ResultUtil.success("操作成功！");
         }else {
