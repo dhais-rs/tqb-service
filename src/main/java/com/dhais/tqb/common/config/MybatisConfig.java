@@ -1,9 +1,11 @@
 package com.dhais.tqb.common.config;
 
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.dhais.tqb.common.utils.PropertiesUtil;
 import org.apache.ibatis.logging.slf4j.Slf4jImpl;
+import org.apache.ibatis.plugin.Interceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,7 +45,13 @@ public class MybatisConfig {
         //是否开启驼峰转换
         mybatisConfiguration.setMapUnderscoreToCamelCase(mapUnderscoreToCamelCase);
         sqlSessionFactory.setConfiguration(mybatisConfiguration);
+        sqlSessionFactory.setPlugins(new Interceptor[]{new PaginationInterceptor()});
 
         return sqlSessionFactory;
+    }
+
+    @Bean
+    public PaginationInterceptor paginationInterceptor(){
+        return new PaginationInterceptor();
     }
 }

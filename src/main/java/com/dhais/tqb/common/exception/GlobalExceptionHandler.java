@@ -24,12 +24,15 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value=Exception.class)
     public Object ServiceExceptionHandler( Exception e)
     {
-        if(e instanceof ServiceException){
+        if(e instanceof NotLoginException){
             logger.info(e.getMessage());
             return ResultUtil.notLogin(e.getMessage());
+        }else if(e instanceof ServiceException){
+            logger.info(e.getMessage());
+            return ResultUtil.fail(e.getMessage());
         }else{
             logger.info(e.getMessage());
-            return ResultUtil.notLogin("服务器正在开小差！");
+            return ResultUtil.fail("服务器正在开小差！");
         }
     }
 //    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)

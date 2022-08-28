@@ -35,10 +35,38 @@ public class BannerController {
     private IBannerService bannerService;
 
     @PostMapping("/page")
-    @ApiOperation(value = "用户分页列表")
+    @ApiOperation(value = "轮播图信息分页列表")
     public Object page(@RequestBody ParamPage<Banner> paramPag){
         IPage<Banner> page = bannerService.getPageList(paramPag);
         return ResultUtil.success(page.getTotal(),page.getRecords(),"查询成功！");
+    }
+
+    @PostMapping("/addBanner")
+    @ApiOperation(value = "新增轮播图信息")
+    public Object addBanner(@RequestBody Banner banner){
+        bannerService.addBanner(banner);
+        return ResultUtil.success("保存成功！");
+    }
+
+    @PostMapping("/editBanner")
+    @ApiOperation(value = "修改轮播图信息")
+    public Object editBanner(@RequestBody Banner banner){
+        bannerService.editBanner(banner);
+        return ResultUtil.success("修改成功！");
+    }
+
+    @PostMapping("/editBannerStatus")
+    @ApiOperation(value = "修改banner图片状态信息")
+    public Object editBannerStatus(@RequestBody Banner banner){
+        bannerService.editBannerStatus(banner);
+        return ResultUtil.success("修改成功！");
+    }
+
+    @PostMapping("/delBanner")
+    @ApiOperation(value = "删除banner图片状态信息")
+    public Object delBanner(@RequestBody Banner banner){
+        bannerService.removeById(banner.getId());
+        return ResultUtil.success("删除成功！");
     }
 
 

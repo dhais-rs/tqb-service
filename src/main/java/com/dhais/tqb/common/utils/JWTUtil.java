@@ -1,6 +1,7 @@
 package com.dhais.tqb.common.utils;
 
 import cn.hutool.json.JSONUtil;
+import com.dhais.tqb.common.exception.NotLoginException;
 import com.dhais.tqb.common.exception.ServiceException;
 import com.dhais.tqb.common.model.HttpCode;
 import com.dhais.tqb.model.User;
@@ -68,11 +69,11 @@ public class JWTUtil {
 
         } catch (ExpiredJwtException e1) {
 
-            throw new ServiceException(HttpCode.FORBIDDEN,"登录信息过期，请重新登录");
+            throw new NotLoginException(HttpCode.FORBIDDEN,"登录信息过期，请重新登录");
 
         } catch (Exception e) {
 
-            throw new ServiceException(HttpCode.UNAUTHORIZED,"用户未登录，请重新登录");
+            throw new NotLoginException(HttpCode.UNAUTHORIZED,"用户未登录，请重新登录");
 
         }
 

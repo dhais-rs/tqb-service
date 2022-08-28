@@ -21,4 +21,22 @@ public interface IBannerService extends IService<Banner> {
      * @return
      */
     IPage<Banner> getPageList(ParamPage<Banner> paramPage);
+
+    /**
+     * 新增banner图片信息
+     * @param banner
+     */
+    void addBanner(Banner banner);
+
+    /**
+     * 修改banner图片信息
+     * @param banner
+     */
+    void editBanner(Banner banner);
+
+    /**
+     * 修改banner图片状态信息
+     * @param banner
+     */
+    void editBannerStatus(Banner banner);
 }
