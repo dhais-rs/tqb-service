@@ -24,7 +24,7 @@ public class JWTUtil {
      */
     final static String BASE64_ENCODED_SECRET_KEY = "YWRtaW4=";
     //过期时间,测试使用十分钟
-    final static long TOKEN_EXP = 1000 * 60 * 10;
+    final static long TOKEN_EXP = 1000 * 60 * PropertiesUtil.getInt("token.time.out");
 
     public static User getUserInfo(){
         return USER_THREAD_LOCAL.get();

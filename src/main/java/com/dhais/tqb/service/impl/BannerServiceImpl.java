@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dhais.tqb.common.exception.ServiceException;
 import com.dhais.tqb.common.utils.JWTUtil;
 import com.dhais.tqb.common.utils.ParamPage;
+import com.dhais.tqb.common.utils.PropertiesUtil;
 import com.dhais.tqb.mapper.BannerMapper;
 import com.dhais.tqb.model.Banner;
 import com.dhais.tqb.model.User;
@@ -63,7 +64,7 @@ public class BannerServiceImpl extends ServiceImpl<BannerMapper,Banner> implemen
             QueryWrapper<Banner> checkWrapper = new QueryWrapper<>();
             checkWrapper.lambda().eq(Banner::getStatus,1);
             Integer flag = baseMapper.selectCount(checkWrapper);
-            if (flag>=4) {
+            if (flag>=PropertiesUtil.getInt("banner.max.num")) {
                 throw new ServiceException("超过最大轮播数量，请修改状态！");
             }
         }
@@ -84,7 +85,7 @@ public class BannerServiceImpl extends ServiceImpl<BannerMapper,Banner> implemen
             QueryWrapper<Banner> checkWrapper = new QueryWrapper<>();
             checkWrapper.lambda().eq(Banner::getStatus,1);
             Integer flag = baseMapper.selectCount(checkWrapper);
-            if (flag>=4) {
+            if (flag>=PropertiesUtil.getInt("banner.max.num")) {
                 Banner oldBanner = baseMapper.selectById(banner.getId());
                 if (oldBanner.getStatus()==0) {
                     throw new ServiceException("超过最大轮播数量，请修改状态！");
@@ -111,7 +112,7 @@ public class BannerServiceImpl extends ServiceImpl<BannerMapper,Banner> implemen
             QueryWrapper<Banner> checkWrapper = new QueryWrapper<>();
             checkWrapper.lambda().eq(Banner::getStatus,1);
             Integer flag = baseMapper.selectCount(checkWrapper);
-            if (flag>=4) {
+            if (flag>= PropertiesUtil.getInt("banner.max.num")) {
                 Banner oldBanner = baseMapper.selectById(banner.getId());
                 if (oldBanner.getStatus()==0) {
                     throw new ServiceException("超过最大轮播数量，请修改状态！");
